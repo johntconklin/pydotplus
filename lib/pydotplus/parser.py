@@ -92,6 +92,7 @@ top_graphs = list()
 def push_top_graph_stmt(str, loc, toks):
     attrs = {}
     g = None
+    strict = False
 
     for element in toks:
         if (isinstance(element, (ParseResults, tuple, list)) and
@@ -99,12 +100,13 @@ def push_top_graph_stmt(str, loc, toks):
             element = element[0]
 
         if element == 'strict':
-            attrs['strict'] = True
+            strict = True
 
         elif element in ['graph', 'digraph']:
             attrs = {}
 
-            g = pydotplus.Dot(graph_type=element, **attrs)
+            g = pydotplus.Dot(graph_type=element, strict=strict, **attrs)
+            strict = False
             attrs['type'] = element
 
             top_graphs.append(g)
