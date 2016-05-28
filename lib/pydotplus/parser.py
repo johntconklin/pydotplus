@@ -415,7 +415,7 @@ def graph_definition():
 
         # dblQuotedString
         double_quoted_string = QuotedString(
-            '"', multiline=True, unquoteResults=False
+            '"', escChar='\\', multiline=True, unquoteResults=False
         )
 
         noncomma_ = "".join([c for c in printables if c != ","])
